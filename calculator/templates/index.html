@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Калькулятор времени</title>
+
+        <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Калькулятор времени между датами</h2>
+        
+        <form method="post" action="/calculate">
+            <div class="block start-block">
+                <h3>Начальная дата и время:</h3>
+                <label>Дата:</label>
+                <input type="date" name="date1" required><br>
+                <label>Время:</label>
+                <input type="time" name="time1" value="00:00" required>
+            </div>
+            
+            <div class="block end-block">
+                <h3>Конечная дата и время:</h3>
+                <label>Дата:</label>
+                <input type="date" name="date2" required><br>
+                <label>Время:</label>
+                <input type="time" name="time2" value="00:00" required>
+            </div>
+            
+            <button type="submit">Рассчитать разницу</button>
+        </form>
+        
+        {% if result %}
+        <div class="result">
+            <strong>Результат:</strong><br>
+            {{ result }}
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        // Устанавливаем сегодняшнюю дату по умолчанию
+        document.querySelector('input[name="date1"]').valueAsDate = new Date();
+        document.querySelector('input[name="date2"]').valueAsDate = new Date();
+    </script>
+</body>
+</html>

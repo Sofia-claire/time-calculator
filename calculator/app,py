@@ -1,0 +1,41 @@
+from flask import Flask, request, render_template
+from datetime import datetime
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/calculate', methods=['POST'])
+def calculate():
+    try:
+        date1 = request.form['date1']
+        time1 = request.form['time1']
+        date2 = request.form['date2']
+        time2 = request.form['time2']
+        
+        # Создаем объекты datetime
+        start = datetime.strptime(f"{date1} {time1}", "%Y-%m-%d %H:%M")
+        end = datetime.strptime(f"{date2} {time2}", "%Y-%m-%d %H:%M")
+        
+        # Вычисляем разницу
+        difference = end - start
+        total_seconds = difference.total_seconds()
+        
+        if total_seconds < 0:
+            return render_template('index.html', result='Ошибка: конечная дата раньше начальной')
+        
+        # Переводим в дни, часы, минуты
+        days = int(total_seconds // (24 * 3600))
+        remaining_seconds = total_seconds % (24 * 3600)
+        hours = int(remaining_seconds // 3600)
+        minutes = int((remaining_seconds % 3600) // 60)
+        
+        return render_template('index.html', result=f'Время решения: {days} дн {hours} ч {minutes} мин')
+    
+    except Exception as e:
+        return render_template('index.html', result=f'Ошибка в данных: {str(e)}')
+
+if __name__ == "__main__":
+    app.run(debug=True)
