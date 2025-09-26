@@ -62,14 +62,14 @@ python app.py
 
 📁 Структура проекта
 
-time-calculator/
-├── app.py              # Основное Flask-приложение
-├── templates/
-│   └── index.html      # Главная страница с формой
-├── static/
-│   └── style.css      # стиль и оформление сайта
-│   └── background.png # фон сайта
-└── README.md          # Эта документация
+* time-calculator/
+* ├── app.py              # Основное Flask-приложение
+* ├── templates/
+* │   └── index.html      # Главная страница с формой
+* ├── static/
+* │   └── style.css      # стиль и оформление сайта
+* │   └── background.png # фон сайта
+* └── README.md          # Эта документация
 ---
 
 🤝 Разработка
